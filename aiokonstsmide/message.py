@@ -4,7 +4,6 @@ from datetime import datetime
 from enum import Enum
 from functools import reduce
 
-
 MAGIC_BYTE = 0xBC
 
 
