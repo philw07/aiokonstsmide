@@ -40,7 +40,7 @@ class Repeat(Enum):
     Saturday = 64
 
 
-def on_off(on: bool) -> list[int]:
+def on_off(on: bool) -> bytes:
     """Constructs a message to turn the device on or off."""
     return bytes(
         [
@@ -57,7 +57,7 @@ def on_off(on: bool) -> list[int]:
     )
 
 
-def control(function: Function, brightness: int, flash_speed: int) -> list[int]:
+def control(function: Function, brightness: int, flash_speed: int) -> bytes:
     """
     Constructs a message to control the function, brightness and flash speed of the device.
 
@@ -87,7 +87,7 @@ def control(function: Function, brightness: int, flash_speed: int) -> list[int]:
     )
 
 
-def password_input(password: str) -> list[int]:
+def password_input(password: str) -> bytes:
     """
     Constructs a password input message.
     The password must consist of exactly six digits.
@@ -113,7 +113,7 @@ def password_input(password: str) -> list[int]:
     )
 
 
-def set_password(password: str) -> list[int]:
+def set_password(password: str) -> bytes:
     """
     Constructs a set password message.
     The password must consist of exactly six digits.
