@@ -3,6 +3,7 @@
 from datetime import datetime
 from enum import Enum
 from functools import reduce
+from typing import List
 
 MAGIC_BYTE = 0xBC
 
@@ -144,7 +145,7 @@ def timer(
     hour: int,
     minute: int,
     function: Function,
-    repeat: list[Repeat],
+    repeat: List[Repeat],
     brightness: int,
 ):
     """Constructs a timer message."""

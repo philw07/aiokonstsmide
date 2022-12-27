@@ -3,6 +3,7 @@
 import asyncio
 import logging
 from dataclasses import dataclass
+from typing import Optional
 
 from bleak import BleakClient
 
@@ -15,12 +16,12 @@ CHARACTERISTIC = "00001001-0000-1000-8000-00805f9b34fb"
 
 async def connect(
     address: str,
+    password: Optional[str] = None,
     on: bool = True,
     function: message.Function = message.Function.Steady,
     brightness: int = 100,
     flash_speed: int = 50,
     timeout: float = 5.0,
-    password: str = None,
 ) -> "Device":
     """
     Connects to the device with the given address.
@@ -53,7 +54,7 @@ class Device:
     def __init__(
         self,
         address: str,
-        password: str = None,
+        password: Optional[str] = None,
         on: bool = True,
         function: message.Function = message.Function.Steady,
         brightness: int = 100,
@@ -165,9 +166,9 @@ class Device:
 
     async def control(
         self,
-        function: message.Function | None = None,
-        brightness: int | None = None,
-        flash_speed: int | None = None,
+        function: Optional[message.Function] = None,
+        brightness: Optional[int] = None,
+        flash_speed: Optional[int] = None,
     ):
         """
         Control the devices function, brightness and flash speed.

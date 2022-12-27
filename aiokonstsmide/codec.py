@@ -3,11 +3,12 @@ Communication with the device is encoded using a simple XOR algorithm.
 """
 
 from random import randint
+from typing import List, Union
 
 from .exceptions import DecodeError, EncodeError
 
 
-def encode(data: list[int] | bytes) -> bytes:
+def encode(data: Union[List[int], bytes]) -> bytes:
     """Encodes a plaintext message to be sent to the device."""
     if not data or len(data) == 0:
         raise EncodeError(
@@ -25,7 +26,7 @@ def encode(data: list[int] | bytes) -> bytes:
     return bytes(enc)
 
 
-def decode(data: list[int] | bytes) -> bytes:
+def decode(data: Union[List[int], bytes]) -> bytes:
     """Decodes an encoded message from the device."""
     if not data or len(data) < 4:
         raise DecodeError(

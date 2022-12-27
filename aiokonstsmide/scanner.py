@@ -2,12 +2,14 @@
 Module for finding available Konstsmide Bluetooth devices.
 """
 
+from typing import List
+
 from bleak import BleakScanner
 
 DEVICE_NAME = "konstsmide"
 
 
-async def find_devices(timeout: float = 5.0) -> list[str]:
+async def find_devices(timeout: float = 5.0) -> List[str]:
     """
     Scans for available Konstsmide Bluetooth devices.
     """
