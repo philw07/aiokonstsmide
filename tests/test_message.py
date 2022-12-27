@@ -19,7 +19,7 @@ def test_control():
             0x44,
             b"\xBC\x02\x01\x23\x20\x00\x00\x00\x00",
         ),
-        (message.Function.InWaves, 0x01, 0x00, b"\xBC\x02\x02\x01\x64\x00\x00\x00\x00"),
+        (message.Function.InWaves, 0x01, 0x00, b"\xBC\x02\x02\x01\x60\x00\x00\x00\x00"),
         (
             message.Function.Sequential,
             0x00,
@@ -34,7 +34,7 @@ def test_control():
             0x55,
             b"\xBC\x02\x06\x19\x0F\x00\x00\x00\x00",
         ),
-        (message.Function.Twinkle, 0x37, 0x01, b"\xBC\x02\x07\x37\x63\x00\x00\x00\x00"),
+        (message.Function.Twinkle, 0x37, 0x01, b"\xBC\x02\x07\x37\x60\x00\x00\x00\x00"),
         (message.Function.Steady, 0x45, 0x63, b"\xBC\x02\x08\x45\x01\x00\x00\x00\x00"),
         (
             message.Function.FlashAlternating,
