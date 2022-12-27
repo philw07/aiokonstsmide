@@ -7,7 +7,7 @@ from random import randint
 from .exceptions import DecodeError, EncodeError
 
 
-def encode(data: list[int] | bytes) -> list[int]:
+def encode(data: list[int] | bytes) -> bytes:
     """Encodes a plaintext message to be sent to the device."""
     if not data or len(data) == 0:
         raise EncodeError(
@@ -22,10 +22,10 @@ def encode(data: list[int] | bytes) -> list[int]:
     for x in data:
         enc.append(x ^ key)
 
-    return enc
+    return bytes(enc)
 
 
-def decode(data: list[int] | bytes) -> list[int]:
+def decode(data: list[int] | bytes) -> bytes:
     """Decodes an encoded message from the device."""
     if not data or len(data) < 4:
         raise DecodeError(
@@ -47,4 +47,4 @@ def decode(data: list[int] | bytes) -> list[int]:
     for x in data[3:]:
         dec.append(x ^ key)
 
-    return dec
+    return bytes(dec)

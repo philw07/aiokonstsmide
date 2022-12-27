@@ -29,7 +29,7 @@ def test_decode():
         ),
     ]
     for enc, dec in msgs:
-        assert codec.decode(enc) == list(dec)
+        assert codec.decode(enc) == dec
 
     # Invalid empty message
     with pytest.raises(DecodeError):
@@ -58,4 +58,4 @@ def test_encode():
         assert enc[0] == 0x54
         assert enc[1] == (len(msg) + 1) ^ 0x54
         # Relying on a working decode function
-        assert codec.decode(enc) == list(msg)
+        assert codec.decode(enc) == msg
