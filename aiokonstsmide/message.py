@@ -78,7 +78,7 @@ def control(function: Function, brightness: int, flash_speed: int) -> bytes:
             Command.Control.value,
             function.value,
             brightness,
-            flash_speed,
+            100 - flash_speed,
             0,
             0,
             0,
