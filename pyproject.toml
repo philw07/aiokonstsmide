@@ -1,0 +1,30 @@
+[project]
+name = "aiokonstsmide"
+version = "0.1.0"
+description = "Library to communicate with Konstsmide Bluetooth powered string lights"
+license = "MIT"
+authors = [
+    { name = "philw07", email = "phil.w07@gmail.com" },
+]
+readme = "README.md"
+repository = "https://github.com/philw07/aiokonstsmide"
+requires-python = ">=3.8"
+keywords = ["konstsmide", "bluetooth", "light", "string light", "ble"]
+classifiers = [
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: System :: Hardware",
+    "Topic :: System :: Hardware :: Hardware Drivers",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
