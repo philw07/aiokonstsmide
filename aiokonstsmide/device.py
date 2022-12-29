@@ -92,7 +92,7 @@ class Device:
                 self.__logger.debug("Synchronizing status")
                 await self.__sync_status()
                 self.__logger.debug("Synchronizing time")
-                await self.__sync_time()
+                await self.sync_time()
             else:
                 self.__logger.error("Failed to connect to device")
 
@@ -206,7 +206,7 @@ class Device:
         """Configures a timer on the device."""
 
         # Make sure time is synchronized
-        await self.__sync_time()
+        await self.sync_time()
 
         # Create timer
         if isinstance(repeat, message.Repeat):
@@ -218,10 +218,12 @@ class Device:
             )
         )
 
-    async def __sync_time(self):
+    async def sync_time(self):
         """
         Sends an RTC message to the device to synchronize the time.
         This is needed for timers to work correctly.
+
+        Time is synchronized implicitly when connecting to the device or changing a timer.
         """
         await self.__write(message.rtc(datetime.now()))
 
