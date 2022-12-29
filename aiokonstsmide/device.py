@@ -46,9 +46,6 @@ class Status:
 class Device:
     """
     Represents a Konstsmide Bluetooth device.
-
-    Note that it seems impossible to read the current status from the device(?).
-    Hence the status will be out of sync when using the official app in parallel.
     """
 
     def __init__(

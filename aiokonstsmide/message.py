@@ -9,6 +9,8 @@ MAGIC_BYTE = 0xBC
 
 
 class Command(Enum):
+    """Commands which can be sent to the device."""
+
     OnOff = 1
     Control = 2
     SetPassword = 3
@@ -18,6 +20,8 @@ class Command(Enum):
 
 
 class Function(Enum):
+    """Functions which the device supports."""
+
     Keep = 0
     Combination = 1
     InWaves = 2
@@ -32,6 +36,8 @@ class Function(Enum):
 
 
 class Repeat(Enum):
+    """Weekdays which can be used for repeating timers."""
+
     Sunday = 1
     Monday = 2
     Tuesday = 4
@@ -61,8 +67,9 @@ def on_off(on: bool) -> bytes:
 def control(function: Function, brightness: int, flash_speed: int) -> bytes:
     """
     Constructs a message to control the function, brightness and flash speed of the device.
-
     The flash speed only affects the alternating and synchronous flash functions.
+
+    NOTE: The Keep function can't be used.
     """
     if not function:
         raise ValueError("A valid function must be given")
@@ -147,8 +154,12 @@ def timer(
     function: Function,
     repeat: List[Repeat],
     brightness: int,
-):
-    """Constructs a timer message."""
+) -> bytes:
+    """
+    Constructs a timer message.
+
+    NOTE: The FlashAlternating and FlashSynchronous functions can't be used.
+    """
     if not (0 <= num <= 7):
         raise ValueError(f"Timer number must be between 0 and 7, got {num}")
     if not (0 <= hour <= 23):
@@ -183,7 +194,7 @@ def timer(
     )
 
 
-def rtc(date: datetime):
+def rtc(date: datetime) -> bytes:
     """
     Constructs an RTC message to synchronize the date and time of the device.
     This is necessary for the timers to work correctly.
