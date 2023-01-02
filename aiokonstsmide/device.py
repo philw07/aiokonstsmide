@@ -3,7 +3,8 @@
 import asyncio
 import logging
 from dataclasses import dataclass
-from typing import Optional
+from datetime import datetime
+from typing import List, Optional, Union
 
 from bleak import BleakClient
 
@@ -90,6 +91,8 @@ class Device:
                 await self.__write(message.password_input(self.__password))
                 self.__logger.debug("Synchronizing status")
                 await self.__sync_status()
+                self.__logger.debug("Synchronizing time")
+                await self.__sync_time()
             else:
                 self.__logger.error("Failed to connect to device")
 
@@ -188,6 +191,39 @@ class Device:
                 self.__status.flash_speed,
             ),
         )
+
+    async def timer(
+        self,
+        num: int,
+        active: bool,
+        turn_on: bool,
+        hour: int,
+        minute: int,
+        function: message.Function,
+        repeat: Union[message.Repeat, List[message.Repeat]],
+        brightness: int,
+    ):
+        """Configures a timer on the device."""
+
+        # Make sure time is synchronized
+        await self.__sync_time()
+
+        # Create timer
+        if isinstance(repeat, message.Repeat):
+            repeat = [repeat]
+
+        await self.__write(
+            message.timer(
+                num, active, turn_on, hour, minute, function, repeat, brightness
+            )
+        )
+
+    async def __sync_time(self):
+        """
+        Sends an RTC message to the device to synchronize the time.
+        This is needed for timers to work correctly.
+        """
+        await self.__write(message.rtc(datetime.now()))
 
     async def __write(self, message: bytes):
         """Writes the given message to the device."""
