@@ -192,6 +192,18 @@ class Device:
             ),
         )
 
+    async def deactivate_timer(self, num: Optional[int] = None):
+        """Deactivates one specific or all timers on the device."""
+        if num is not None:
+            await self.timer(num, False, False, 0, 0, message.Function.Steady, [], 100)
+        else:
+            for i in range(8):
+                await self.__write(
+                    message.timer(
+                        i, False, False, 0, 0, message.Function.Steady, [], 100
+                    )
+                )
+
     async def timer(
         self,
         num: int,
