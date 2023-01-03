@@ -195,12 +195,28 @@ class Device:
     async def deactivate_timer(self, num: Optional[int] = None):
         """Deactivates one specific or all timers on the device."""
         if num is not None:
-            await self.timer(num, False, False, 0, 0, message.Function.Steady, [], 100)
+            await self.timer(
+                num,
+                False,
+                False,
+                0,
+                0,
+                message.Function.Steady,
+                [],
+                self.__status.brightness,
+            )
         else:
             for i in range(8):
                 await self.__write(
                     message.timer(
-                        i, False, False, 0, 0, message.Function.Steady, [], 100
+                        i,
+                        False,
+                        False,
+                        0,
+                        0,
+                        message.Function.Steady,
+                        [],
+                        self.__status.brightness,
                     )
                 )
 
@@ -213,7 +229,6 @@ class Device:
         minute: int,
         function: message.Function,
         repeat: Union[message.Repeat, List[message.Repeat]],
-        brightness: int,
     ):
         """Configures a timer on the device."""
 
@@ -226,7 +241,14 @@ class Device:
 
         await self.__write(
             message.timer(
-                num, active, turn_on, hour, minute, function, repeat, brightness
+                num,
+                active,
+                turn_on,
+                hour,
+                minute,
+                function,
+                repeat,
+                self.__status.brightness,
             )
         )
 

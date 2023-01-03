@@ -162,6 +162,7 @@ def timer(
     Constructs a timer message.
 
     NOTE: The FlashAlternating and FlashSynchronous functions can't be used.
+    NOTE: The brightness value doesn't work, the device keeps the brightness set previously.
     """
     if not (0 <= num <= 7):
         raise ValueError(f"Timer number must be between 0 and 7, got {num}")
