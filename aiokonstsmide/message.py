@@ -47,6 +47,7 @@ class Repeat(Enum):
     Saturday = 64
     Weekend = 65
     Weekdays = 62
+    Everyday = 127
 
 
 def on_off(on: bool) -> bytes:
