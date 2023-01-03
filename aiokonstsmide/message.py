@@ -185,7 +185,7 @@ def timer(
             MAGIC_BYTE,
             Command.Timer.value,
             num,
-            int(turn_on),
+            int(not turn_on),
             int(active),
             hour,
             minute,
