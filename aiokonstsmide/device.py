@@ -92,7 +92,7 @@ class Device:
                 self.__logger.debug("Synchronizing status")
                 await self.__sync_status()
                 self.__logger.debug("Synchronizing time")
-                await self.__sync_time()
+                await self.sync_time()
             else:
                 self.__logger.error("Failed to connect to device")
 
@@ -192,6 +192,34 @@ class Device:
             ),
         )
 
+    async def deactivate_timer(self, num: Optional[int] = None):
+        """Deactivates one specific or all timers on the device."""
+        if num is not None:
+            await self.timer(
+                num,
+                False,
+                False,
+                0,
+                0,
+                message.Function.Steady,
+                [],
+                self.__status.brightness,
+            )
+        else:
+            for i in range(8):
+                await self.__write(
+                    message.timer(
+                        i,
+                        False,
+                        False,
+                        0,
+                        0,
+                        message.Function.Steady,
+                        [],
+                        self.__status.brightness,
+                    )
+                )
+
     async def timer(
         self,
         num: int,
@@ -201,12 +229,11 @@ class Device:
         minute: int,
         function: message.Function,
         repeat: Union[message.Repeat, List[message.Repeat]],
-        brightness: int,
     ):
         """Configures a timer on the device."""
 
         # Make sure time is synchronized
-        await self.__sync_time()
+        await self.sync_time()
 
         # Create timer
         if isinstance(repeat, message.Repeat):
@@ -214,14 +241,23 @@ class Device:
 
         await self.__write(
             message.timer(
-                num, active, turn_on, hour, minute, function, repeat, brightness
+                num,
+                active,
+                turn_on,
+                hour,
+                minute,
+                function,
+                repeat,
+                self.__status.brightness,
             )
         )
 
-    async def __sync_time(self):
+    async def sync_time(self):
         """
         Sends an RTC message to the device to synchronize the time.
         This is needed for timers to work correctly.
+
+        Time is synchronized implicitly when connecting to the device or changing a timer.
         """
         await self.__write(message.rtc(datetime.now()))
 

@@ -1,5 +1,5 @@
 from .device import Device, connect
-from .message import Function
+from .message import Function, Repeat
 from .scanner import check_address, find_devices
 
 __all__ = [
@@ -8,4 +8,5 @@ __all__ = [
     "connect",
     "Device",
     "Function",
+    "Repeat",
 ]

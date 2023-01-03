@@ -121,7 +121,7 @@ def test_timer():
             [message.Repeat.Saturday, message.Repeat.Sunday],
             100,
         )
-        == b"\xBC\x05\x00\x00\x01\x0C\x0C\x41\x02\x64"
+        == b"\xBC\x05\x00\x01\x01\x0C\x0C\x41\x02\x64"
     )
     assert (
         message.timer(
@@ -140,7 +140,7 @@ def test_timer():
             ],
             53,
         )
-        == b"\xBC\x05\x01\x01\x00\x10\x39\x3E\x03\x35"
+        == b"\xBC\x05\x01\x00\x00\x10\x39\x3E\x03\x35"
     )
     assert (
         message.timer(
@@ -153,7 +153,7 @@ def test_timer():
             [message.Repeat.Monday, message.Repeat.Tuesday, message.Repeat.Sunday],
             10,
         )
-        == b"\xBC\x05\x06\x01\x01\x0E\x03\x07\x00\x0A"
+        == b"\xBC\x05\x06\x00\x01\x0E\x03\x07\x00\x0A"
     )
     assert (
         message.timer(
@@ -166,7 +166,7 @@ def test_timer():
             [],
             10,
         )
-        == b"\xBC\x05\x06\x01\x01\x0E\x03\x00\x00\x0A"
+        == b"\xBC\x05\x06\x00\x01\x0E\x03\x00\x00\x0A"
     )
     assert (
         message.timer(
@@ -179,7 +179,7 @@ def test_timer():
             None,
             10,
         )
-        == b"\xBC\x05\x06\x01\x01\x0E\x03\x00\x00\x0A"
+        == b"\xBC\x05\x06\x00\x01\x0E\x03\x00\x00\x0A"
     )
 
     # Invalid values
