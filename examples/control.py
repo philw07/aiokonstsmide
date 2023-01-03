@@ -1,3 +1,8 @@
+"""
+Connects to the device with the given address and
+turns on each function for three seconds.
+"""
+
 import asyncio
 import sys
 
