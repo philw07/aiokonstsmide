@@ -1,3 +1,5 @@
+"""Tests for the message module."""
+
 from datetime import datetime
 
 import pytest

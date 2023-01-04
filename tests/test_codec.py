@@ -1,3 +1,5 @@
+"""Tests for the codec module."""
+
 import pytest
 
 from aiokonstsmide import codec
