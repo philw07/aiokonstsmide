@@ -1,5 +1,9 @@
+"""
+An asynchronous library to communicate with Konstsmide Bluetooth string lights.
+"""
+
 from .device import Device, connect
-from .exceptions import AioKonstmideError, DeviceNotFoundError
+from .exceptions import AioKonstmideError, DecodeError, DeviceNotFoundError, EncodeError
 from .message import Function, Repeat
 from .scanner import check_address, find_devices
 
@@ -12,4 +16,6 @@ __all__ = [
     "Repeat",
     "AioKonstmideError",
     "DeviceNotFoundError",
+    "EncodeError",
+    "DecodeError",
 ]
