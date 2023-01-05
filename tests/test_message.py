@@ -200,6 +200,9 @@ def test_timer():
         message.timer(0, True, True, 1, 60, message.Function.Chasing, [], 100)
 
     with pytest.raises(ValueError):
+        message.timer(0, True, True, 1, 1, None, [], 100)
+
+    with pytest.raises(ValueError):
         message.timer(0, True, True, 1, 1, message.Function.FlashAlternating, [], 100)
     with pytest.raises(ValueError):
         message.timer(0, True, True, 1, 1, message.Function.FlashSynchronous, [], 100)
