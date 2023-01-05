@@ -27,7 +27,7 @@ async def connect(
     """
     Connects to the device with the given address.
 
-    Make sure to call disconnect() once you're finished,
+    Make sure to call `Device.disconnect` once you're finished,
     otherwise it will not be possible to connect to the device anymore
     unless the power is cut.
 
@@ -155,22 +155,22 @@ class Device:
 
     @property
     def is_on(self) -> bool:
-        """Returns True if the device is currently on, else False."""
+        """`True` if the device is currently on, else `False`."""
         return self.__status.on
 
     @property
     def brightness(self) -> int:
-        """Returns the current brightness of the device."""
+        """The current brightness of the device."""
         return self.__status.brightness
 
     @property
     def flash_speed(self) -> int:
-        """Returns the current flash speed of the device."""
+        """The current flash speed of the device."""
         return self.__status.flash_speed
 
     @property
     def function(self) -> message.Function:
-        """Returns the current function of the device."""
+        """The current function of the device."""
         return self.__status.function
 
     async def on(self):
@@ -273,8 +273,8 @@ class Device:
         The device has 8 built-in timers which can be set individually as desired.
 
         :param num: The timer to set, in the range 0 - 7
-        :param active: True if the timer should be activated or False if it should be deactivated
-        :param turn_on: True if the device should be turned on the timer is triggered, False otherwise
+        :param active: `True` if the timer should be activated or `False` if it should be deactivated
+        :param turn_on: `True` if the device should be turned on the timer is triggered, `False` otherwise
         :param hour: The hour (0-23) at which the timer triggers
         :param minute: The minute (0-59) at which the timer triggers
         :param function: The function to set when the timer is triggered
