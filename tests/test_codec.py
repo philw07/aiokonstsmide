@@ -1,7 +1,9 @@
+"""Tests for the codec module."""
+
 import pytest
 
 from aiokonstsmide import codec
-from aiokonstsmide.exceptions import DecodeError
+from aiokonstsmide.exceptions import DecodeError, EncodeError
 
 
 def test_decode():
@@ -59,3 +61,7 @@ def test_encode():
         assert enc[1] == (len(msg) + 1) ^ 0x54
         # Relying on a working decode function
         assert codec.decode(enc) == msg
+
+    # Invalid empty message
+    with pytest.raises(EncodeError):
+        codec.encode(b"")
