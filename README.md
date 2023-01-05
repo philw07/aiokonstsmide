@@ -2,6 +2,8 @@
 
 An asynchronous library to communicate with Konstsmide Bluetooth string lights.
 
+- [Documentation](https://philw07.github.io/aiokonstsmide/aiokonstsmide.html)
+
 ## Supported features
 
 - Connect with a device and send the password as pairing mechanism
