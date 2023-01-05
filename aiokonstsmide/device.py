@@ -203,7 +203,6 @@ class Device:
                 0,
                 message.Function.Steady,
                 [],
-                self.__status.brightness,
             )
         else:
             for i in range(8):
