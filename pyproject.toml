@@ -1,6 +1,6 @@
 [project]
 name = "aiokonstsmide"
-version = "0.1.0"
+version = "0.2.0"
 description = "Library to communicate with Konstsmide Bluetooth powered string lights"
 license = "MIT"
 authors = [
@@ -13,7 +13,7 @@ requires-python = ">=3.8"
 keywords = ["konstsmide", "bluetooth", "light", "string light", "ble"]
 classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python",
