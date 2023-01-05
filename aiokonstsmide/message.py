@@ -23,6 +23,7 @@ class Function(Enum):
     """Functions which the device supports."""
 
     Keep = 0
+    """Keep the currently set function, only available for timers."""
     Combination = 1
     InWaves = 2
     Sequential = 3
@@ -32,7 +33,9 @@ class Function(Enum):
     Twinkle = 7
     Steady = 8
     FlashAlternating = 9
+    """This function is not supported for timers."""
     FlashSynchronous = 10
+    """This function is not supported for timers."""
 
 
 class Repeat(Enum):

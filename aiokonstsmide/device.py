@@ -30,6 +30,16 @@ async def connect(
     Make sure to call disconnect() once you're finished,
     otherwise it will not be possible to connect to the device anymore
     unless the power is cut.
+
+    :param address: The address of the device to connect to
+    :param password: The password of the device
+    :param on: If the device should be turned on or off after connecting
+    :param function: The function to set after connecting
+    :param brightness: The brightness to set after connecting, in the range 0 (dim) - 100 (bright)
+    :param flash_speed: The flash speed to set after connecting, in the range 0 (slow) - 100 (fast)
+    :param timeout: Timeout in seconds
+
+    :return: A Device instance connected to the device with the given address
     """
     device = Device(address, password, on, function, brightness, flash_speed)
     await device.connect(timeout)
@@ -38,6 +48,8 @@ async def connect(
 
 @dataclass
 class Status:
+    """Dataclass to hold the status of the device."""
+
     on: bool
     function: message.Function
     brightness: int
@@ -58,7 +70,16 @@ class Device:
         brightness: int = 100,
         flash_speed: int = 50,
     ):
-        """Initializes a device."""
+        """
+        Initializes a Device instance.
+
+        :param address: The address of the device to connect to
+        :param password: The password of the device
+        :param on: If the device should be turned on or off after connecting
+        :param function: The function to set after connecting
+        :param brightness: The brightness to set after connecting, in the range 0 (dim) - 100 (bright)
+        :param flash_speed: The flash speed to set after connecting, in the range 0 (slow) - 100 (fast)
+        """
         self.__logger = logging.getLogger(f"{__package__}({address})")
         self.__address = address
         self.__password = password or "123456"
@@ -67,7 +88,11 @@ class Device:
         self.__reconnect = True
 
     async def connect(self, timeout: float = 5.0):
-        """Establishes a connection to the device."""
+        """
+        Establishes a connection to the device.
+
+        :param timeout: The timeout in seconds
+        """
         if not self.__client:
             if not await check_address(self.__address):
                 raise DeviceNotFoundError
@@ -149,19 +174,19 @@ class Device:
         return self.__status.function
 
     async def on(self):
-        """Turn the device on."""
+        """Turn on the device."""
         self.__logger.debug("Turning on")
         self.__status.on = True
         await self.__write(message.on_off(self.__status.on))
 
     async def off(self):
-        """Turn the device off."""
+        """Turn off the device."""
         self.__logger.debug("Turning off")
         self.__status.on = False
         await self.__write(message.on_off(self.__status.on))
 
     async def toggle(self):
-        """Toggle the device status between on and off."""
+        """Toggle between on and off."""
         if self.__status.on:
             await self.off()
         else:
@@ -176,6 +201,10 @@ class Device:
         """
         Control the devices function, brightness and flash speed.
         If a parameter is None, the current value will be kept.
+
+        :param function: The function to set
+        :param brightness: The brightness to set, in the range 0 (dim) - 100 (bright)
+        :param flash_speed: The flash speed to set, in the range 0 (slow) - 100 (fast)
         """
         if function:
             self.__status.function = function
@@ -199,7 +228,11 @@ class Device:
         )
 
     async def deactivate_timer(self, num: Optional[int] = None):
-        """Deactivates one specific or all timers on the device."""
+        """
+        Deactivates one specific or all timers on the device.
+
+        :param num: The timer to deactivate, in the range 0 - 7 or `None` for all timers
+        """
         if num is not None:
             await self.timer(
                 num,
@@ -235,7 +268,18 @@ class Device:
         function: message.Function,
         repeat: Union[message.Repeat, List[message.Repeat]],
     ):
-        """Configures a timer on the device."""
+        """
+        Configures a timer on the device.
+        The device has 8 built-in timers which can be set individually as desired.
+
+        :param num: The timer to set, in the range 0 - 7
+        :param active: True if the timer should be activated or False if it should be deactivated
+        :param turn_on: True if the device should be turned on the timer is triggered, False otherwise
+        :param hour: The hour (0-23) at which the timer triggers
+        :param minute: The minute (0-59) at which the timer triggers
+        :param function: The function to set when the timer is triggered
+        :param repeat: On which weekdays the timer triggers
+        """
 
         # Make sure time is synchronized
         await self.sync_time()
