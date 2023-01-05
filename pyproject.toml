@@ -7,8 +7,6 @@ authors = [
     { name = "philw07", email = "phil.w07@gmail.com" },
 ]
 readme = "README.md"
-repository = "https://github.com/philw07/aiokonstsmide"
-documentation = "https://philw07.github.io/aiokonstsmide/aiokonstsmide.html"
 requires-python = ">=3.8"
 keywords = ["konstsmide", "bluetooth", "light", "string light", "ble"]
 classifiers = [
@@ -25,6 +23,10 @@ classifiers = [
     "Topic :: System :: Hardware",
     "Topic :: System :: Hardware :: Hardware Drivers",
 ]
+
+[project.urls]
+Repository = "https://github.com/philw07/aiokonstsmide"
+Documentation = "https://philw07.github.io/aiokonstsmide/aiokonstsmide.html"
 
 [build-system]
 requires = ["hatchling"]
