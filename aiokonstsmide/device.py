@@ -102,15 +102,18 @@ class Device:
         Since the status of the device can't be read,
         the device status is set according to the internal status.
         """
-        if self.__status.on:
-            await self.on()
-        else:
-            await self.off()
+        init_state = self.__status.on
+
         await self.control(
             function=self.__status.function,
             brightness=self.__status.brightness,
             flash_speed=self.__status.flash_speed,
         )
+
+        if init_state:
+            await self.on()
+        else:
+            await self.off()
 
     async def disconnect(self):
         """Disconnects from the device."""
@@ -180,6 +183,9 @@ class Device:
             self.__status.brightness = brightness
         if flash_speed:
             self.__status.flash_speed = flash_speed
+
+        # Control turns on the device automatically
+        self.__status.on = True
 
         self.__logger.debug(
             f"Setting function {self.__status.function.name} with brightness {self.__status.brightness} and flash speed {self.__status.flash_speed}"
