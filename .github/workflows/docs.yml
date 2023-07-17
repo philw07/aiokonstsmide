@@ -21,7 +21,7 @@ jobs:
           python-version: '3.11'
       - run: pip install -r requirements.txt -r requirements-dev.txt
       - run: pdoc -o docs/ aiokonstsmide
-      - uses: actions/upload-pages-artifact@v1
+      - uses: actions/upload-pages-artifact@v2
         with:
           path: docs/
 
